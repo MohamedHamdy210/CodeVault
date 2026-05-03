@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const path = usePathname()
-  console.log(path)
+  
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-[#1e1e1e] border-b border-gray-800 sticky top-0 z-50">

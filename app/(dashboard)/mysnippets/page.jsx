@@ -1,14 +1,17 @@
-
 import SnippetGrid from "@/app/components/SnippetsGrid";
 import { auth } from "@clerk/nextjs/server";
 import { Clock, FolderCode, LayoutGrid } from "lucide-react";
-
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_VERCEL_URL)
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  return "http://localhost:3000";
+};
 const page = async () => {
   const { getToken } = await auth();
 
   const token = await getToken();
 
-  let data = await fetch("/api/mysnippets", {
+  let data = await fetch(`${getBaseUrl()}/api/mysnippets`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -57,9 +60,7 @@ const page = async () => {
           </div>
         </header>
 
-        
         <section>
-          
           <div className="flex items-center gap-3 mb-8">
             <div className="h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
             <h2 className="text-lg font-medium text-gray-300">
@@ -67,12 +68,9 @@ const page = async () => {
             </h2>
           </div>
 
-          
           <SnippetGrid snippets={snippets} />
-
         </section>
       </div>
-
     </div>
   );
 };
