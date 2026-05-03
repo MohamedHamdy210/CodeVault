@@ -1,22 +1,15 @@
 import SnippetGrid from "@/app/components/SnippetsGrid";
+import dbConnect from "@/lib/db";
+import Snippet from "@/models/Snippet";
 import { auth } from "@clerk/nextjs/server";
 import { Clock, FolderCode, LayoutGrid } from "lucide-react";
-const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_VERCEL_URL)
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
-  return "http://localhost:3000";
-};
+
 const page = async () => {
-  const { getToken } = await auth();
+  const {userId}= await auth()
+  await dbConnect();
 
-  const token = await getToken();
+  const snippets = await Snippet.find({ ownerCId: userId }).lean();
 
-  let data = await fetch(`${getBaseUrl()}/api/mysnippets`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  let snippets = await data.json();
   const stats = [
     {
       label: "Total Snippets",

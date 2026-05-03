@@ -1,27 +1,18 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import SnippetCard from "../components/SnippetCard";
-import AddButton from "../components/AddButton";
+
+
 import HeroSection from "../components/Hero";
 import SnippetGrid from "../components/SnippetsGrid";
-const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_VERCEL_URL)
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
-  return "http://localhost:3000";
-};
+import Snippet from "@/models/Snippet";
+import dbConnect from "@/lib/db";
+
 const page = async () => {
-  const { getToken, userId } = await auth();
+  
+  
+await dbConnect();
+const snippets = await Snippet.find({}).lean();
+  
 
-  const token = await getToken();
 
-  let data = await fetch(`${getBaseUrl()}/api/snippets`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
-  });
-
-  let snippets = await data.json();
   return (
     <div className="">
       <HeroSection />
