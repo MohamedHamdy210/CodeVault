@@ -84,7 +84,7 @@ CodeVault is deployed on **Vercel** with automatic deployments on every push to 
 
 ## 💬 Support & Feedback
 
-Have questions or feature requests? Open an issue on [GitHub Issues](https://github.com/m-hamdy/code-vault/issues).
+Have questions or feature requests? Open an issue on [GitHub Issues](https://github.com/MohamedHamdy210/code-vault/issues).
 
 ---
 
