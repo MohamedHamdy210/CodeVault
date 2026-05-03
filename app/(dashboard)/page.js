@@ -10,7 +10,7 @@ const page = async () => {
 
   const token = await getToken();
 
-  let data = await fetch("http://localhost:3000/api/snippets", {
+  let data = await fetch("/api/snippets", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

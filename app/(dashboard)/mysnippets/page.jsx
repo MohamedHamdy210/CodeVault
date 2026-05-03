@@ -8,7 +8,7 @@ const page = async () => {
 
   const token = await getToken();
 
-  let data = await fetch("http://localhost:3000/api/mysnippets", {
+  let data = await fetch("/api/mysnippets", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
